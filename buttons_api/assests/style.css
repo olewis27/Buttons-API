@@ -1,0 +1,22 @@
+body {
+	background-image: url(../images/film-background.jpg);
+}
+
+h1 {
+	margin-top: 190px;
+	float: right;
+	font-size: 30px;
+	font-family: 'Bungee Inline', cursive;
+	color: #ffffff;
+}
+
+#moviebutton {
+	margin-top: 220px;
+
+}
+
+.btn-sm {
+	font-family: 'Bungee Inline', cursive;
+	background-color: #ffffff;
+	color: #000000;
+}
