@@ -1,26 +1,24 @@
-
-
 // Activates jQuery once page is loaded and doesnt require an on-click event
 $(function() {
 
 // Movies is the Category
-    titleButtons(zzzz, '____Button', '#____Button');
+    titleButtons(movies, 'movieButton', '#movieButton');
 });
 
 // Movie title array
-var zzzz = ["Pulp Fiction", "GoodFellas", "Superman", "Seven", "Heat", "The Dark Knight", "Gladiator", "The Departed", "New Jack City", "The Bourne Identity", "Casino Royale", "X-Men", "Harry Potter", "The Wolf of Wall Street", "Training Day", "Iron Man", "Captain America", "The Avengers", "American Hustle", "Scarface"];
+var movies = ["Pulp Fiction", "GoodFellas", "Superman", "Seven", "Heat", "The Dark Knight", "Gladiator", "The Departed", "New Jack City", "The Bourne Identity", "Casino Royale", "X-Men", "Harry Potter", "The Wolf of Wall Street", "Training Day", "Iron Man", "Captain America", "The Avengers", "American Hustle", "Scarface"];
 
 //functions to create buttons from above array and add new buttons inputed by user
-function titleButtons(____Array, newClass, new____Div){
-    $(new___Div).empty();
+function titleButtons(movieArray, newClass, newTitleDiv){
+    $(newTitleDiv).empty();
 
-    for (var i = 0; i < ____Array.length; i++){
+    for (var i = 0; i < movieArray.length; i++){
         
         var newButton = $('<button>')
-        newButton.addClass(____Class);
-        newButton.attr('data-title', ____Array[i]);
-        newButton.text(___Array[i]);
-        $(new____Div).append(newButton);
+        newButton.addClass(newClass);
+        newButton.attr('data-title', movieArray[i]);
+        newButton.text(movieArray[i]);
+        $(newTitleDiv).append(newButton);
 
         // console.log(titleButtons);
         // console.log(newTitleDiv);
@@ -31,13 +29,13 @@ function titleButtons(____Array, newClass, new____Div){
 }
 
 //Runs API Call and modifies the state of the button
-    $(document).on('click', '.____Button', function(){
-    $('#____').empty();
-    $('.____Button').removeClass('active');
+    $(document).on('click', '.movieButton', function(){
+    $('#movies').empty();
+    $('.movieButton').removeClass('active');
     $(this).addClass('active');
-
+        console.log("HERE")
 // Type = Movie Title
-    var type = $(this).data('Movies');
+    var type = $(this).data('title');
 
 //API Call URL & Key
     var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + type + "&api_key=dc6zaTOxFJmzC&limit=10";
@@ -52,27 +50,35 @@ function titleButtons(____Array, newClass, new____Div){
          for(var i=0; i < results.length; i++){
 
 // New DIV for the retults    
-            var new DIV = $('<div class="movie-item">');
+            var movieDiv = $('<div class="movie-item">');
 
 // Calls the return item an Image
-            var 1st variable = $('<img>');
+            var movieGiph = $('<img>');
 
 // New variable to add the Rating to each result
+            var myDiv = $('<div>');
             var p = $('<p>').text( "Rating: " + results[i].rating + " ");
+            p.addClass("p");
+            myDiv.append(p);
 
 // Animate & Still Variables
             var animated = results[i].images.fixed_height.url;
             var still = results[i].images.fixed_height_still.url;
 
 // Adding attributes to MovieGiph & P and appending to MovieDiv
-            1st variable.attr('fixed_height', 150);
-            1st variable.attr('src', still);
-            1st variable.attr('data-still', still);
-            1st variable.attr('data-animate', animated);
-            1st variable.attr('data-state', 'still');
-            1st variable.addClass("1st variable");
-            2nd variable.append(1st new variable you created above);
-            new DIV.append(to array);
+            movieGiph.attr('fixed_height', 150);
+            movieGiph.attr('src', still);
+            movieGiph.attr('data-still', still);
+            movieGiph.attr('data-animate', animated);
+            movieGiph.attr('data-state', 'still');
+            movieGiph.addClass("movieGiph");
+             //p.addClass("p");
+            var lineSeparator = $('<hr>');
+
+            movieDiv.append(myDiv);
+            movieDiv.append(movieGiph);
+            movieDiv.append(lineSeparator);
+            
 
 // Appending MovieDiv to Movies ID
             $('#movies').append(movieDiv);
@@ -82,8 +88,8 @@ function titleButtons(____Array, newClass, new____Div){
 
 });
  
-// On click function added to each 1st variable and which will modify the state of the Giph via the If statements below
-$(document).on('click', '.1st variable', function(){
+// On click function added to each movieGiph and which will modify the state of the Giph via the If statements below
+$(document).on('click', '.movieGiph', function(){
     var state = $(this).attr('data-state');
 
 // If else statments to control the state of the Giph whenever cliked
@@ -103,18 +109,20 @@ $(document).on('click', '.1st variable', function(){
 })
 
 // On click function using the submit button to capture the user input values
-$('#').on('click', function(){
-    var ____Movie = $('input').val();
+$('#newMovie').on('click', function(){
+    var addMovie = $('input').val();
 
-    console.log(____Movie);
+    console.log(addMovie);
 
 // Pushes the new user input value into the movie array
-    ....push();
+    movies.push(addMovie);
 
-// Creates the above as a button by re-calling the titleButtons
+// Issues the above as a button by re-calling the titleButtons
+    titleButtons(movies, 'movieButton', '#movieButton');
 
     console.log('clicked')
 
 // Keeps the page from refreshing automatically
     return false;
 });
+// });
